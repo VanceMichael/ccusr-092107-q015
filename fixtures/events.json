@@ -1,0 +1,138 @@
+{
+  "domain": "pinglu-canal-patrol",
+  "version": 1,
+  "note": "样例事件流，编号与主体均为虚构。arrival 为到达平台时间，obs_ts 为传感器观测时间，二者不一致即表示迟到/补报。",
+  "scenarios": [
+    {
+      "id": "A-FOG-MD",
+      "title": "马道雾航：雷达/视频/AIS三源归并、人工确认、登临复查闭环、闭环后补报不倒退",
+      "events": [
+        { "t": "obs", "arrival": "2026-09-30T05:59:12", "obs": { "device_id": "AIS-MD-01", "obs_ts": "2026-09-30T05:59:10", "kind": "ais_target", "mmsi": "413000123", "kp": 31.55, "sog_kn": 6.0 } },
+        { "t": "obs", "arrival": "2026-09-30T06:00:02", "obs": { "device_id": "RADAR-MD-01", "obs_ts": "2026-09-30T06:00:00", "kind": "track", "track_id": "TRK-7781", "kp": 31.70, "sog_kn": 6.0 } },
+        { "t": "obs", "arrival": "2026-09-30T06:00:40", "obs": { "device_id": "RADAR-MD-01", "obs_ts": "2026-09-30T06:00:00", "kind": "track", "track_id": "TRK-7781", "kp": 31.70, "sog_kn": 6.0 } },
+        { "t": "obs", "arrival": "2026-09-30T06:00:25", "obs": { "device_id": "CAM-MD-02", "obs_ts": "2026-09-30T06:00:20", "kind": "video_target", "plate_no": "桂平货2021-0456", "kp": 31.72, "sog_kn": 5.5 } },
+        { "t": "obs", "arrival": "2026-09-30T06:01:05", "obs": { "device_id": "WD-MD-01", "obs_ts": "2026-09-30T06:01:00", "kind": "env", "values": { "visibility_m": 450 } } },
+
+        { "t": "confirm", "at": "2026-09-30T06:03:00", "ref": 0, "actor": "OF-HUANG", "note": "视频核实为桂源货01，雾航进入马道船闸施工限制区" },
+        { "t": "push", "at": "2026-09-30T06:03:30", "ref": 0, "actor": "OF-HUANG" },
+        { "t": "call", "at": "2026-09-30T06:04:00", "ref": 0, "actor": "OF-HUANG", "instruction": "立即减速，就近到马道锚地择泊，等候登临检查", "ack": "收到，马上靠马道锚地" },
+        { "t": "dispatch", "at": "2026-09-30T06:05:00", "ref": 0, "berth_id": "B-07" },
+        { "t": "board", "at": "2026-09-30T06:31:00", "ref": 0, "actor": "OF-LIN", "result": "violation", "findings": "能见度不足1000米冒险航行并闯入施工限制区", "corrective": "当场责令停航整改，宣讲雾航规定" },
+        { "t": "recheck", "at": "2026-09-30T08:10:00", "ref": 0, "actor": "OF-LIN", "compliant": true, "note": "已按要求锚泊，证照齐全，整改到位" },
+        { "t": "close", "at": "2026-09-30T08:12:00", "ref": 0, "actor": "OF-HUANG" },
+
+        { "t": "obs", "arrival": "2026-09-30T08:20:00", "obs": { "device_id": "AIS-MD-01", "obs_ts": "2026-09-30T05:58:30", "kind": "ais_target", "mmsi": "413000123", "kp": 31.30, "sog_kn": 6.0, "backfill": true } }
+      ],
+      "expect": {
+        "case_count": 1,
+        "final_status": "CLOSED",
+        "vessel_id": "V-GUIYU01",
+        "alias_count": 3,
+        "late_evidence": 1,
+        "berth_id": "B-07",
+        "boat_id": "PT-101",
+        "boarding_result": "violation",
+        "lineage_devices": ["RADAR-MD-01", "CAM-MD-02", "AIS-MD-01", "WD-MD-01"]
+      }
+    },
+    {
+      "id": "B-SPEED-QN",
+      "title": "青年超速：雷达航迹与迟到AIS报文归并不得开两单",
+      "events": [
+        { "t": "obs", "arrival": "2026-09-30T08:00:03", "obs": { "device_id": "RADAR-QN-01", "obs_ts": "2026-09-30T08:00:00", "kind": "track", "track_id": "TRK-9002", "kp": 46.0, "sog_kn": 13.5 } },
+        { "t": "obs", "arrival": "2026-09-30T08:02:30", "obs": { "device_id": "AIS-QN-01", "obs_ts": "2026-09-30T07:59:50", "kind": "ais_target", "mmsi": "413000789", "kp": 45.9, "sog_kn": 13.2, "backfill": true } },
+        { "t": "obs", "arrival": "2026-09-30T08:02:31", "obs": { "device_id": "AIS-QN-01", "obs_ts": "2026-09-30T07:59:50", "kind": "ais_target", "mmsi": "413000789", "kp": 45.9, "sog_kn": 13.2, "backfill": true } },
+
+        { "t": "confirm", "at": "2026-09-30T08:03:00", "ref": 0, "actor": "OF-HUANG", "note": "雷达与AIS航迹重合，确认南海驳08超速" },
+        { "t": "push", "at": "2026-09-30T08:03:30", "ref": 0 },
+        { "t": "call", "at": "2026-09-30T08:04:00", "ref": 0, "instruction": "立即减速至限速以内，到青年锚地接受检查", "ack": "收到，已减速" },
+        { "t": "dispatch", "at": "2026-09-30T08:05:00", "ref": 0, "berth_id": "B-09" },
+        { "t": "board", "at": "2026-09-30T08:25:00", "ref": 0, "actor": "OF-MENG", "result": "violation", "findings": "实测航速13.2节，超过10节限速", "corrective": "责令书面检讨并行政处罚" },
+        { "t": "recheck", "at": "2026-09-30T09:00:00", "ref": 0, "actor": "OF-MENG", "compliant": true },
+        { "t": "close", "at": "2026-09-30T09:05:00", "ref": 0 }
+      ],
+      "expect": {
+        "case_count": 1,
+        "final_status": "CLOSED",
+        "vessel_id": "V-NANHAI08",
+        "alias_count": 2,
+        "berth_id": "B-09",
+        "boat_id": "PT-202"
+      }
+    },
+    {
+      "id": "C-LEVEL-QS",
+      "title": "企石水位陡涨：低富余水深双船、锚地泊位与巡查艇冲突、跨航段支援、断网补传",
+      "events": [
+        { "t": "obs", "arrival": "2026-09-30T14:00:03", "obs": { "device_id": "RADAR-QS-02", "obs_ts": "2026-09-30T14:00:00", "kind": "track", "track_id": "TRK-6601", "kp": 57.0, "sog_kn": 5.0 } },
+        { "t": "obs", "arrival": "2026-09-30T14:00:12", "obs": { "device_id": "AIS-QS-01", "obs_ts": "2026-09-30T14:00:10", "kind": "ais_target", "mmsi": "413000555", "kp": 57.02, "sog_kn": 5.1 } },
+        { "t": "obs", "arrival": "2026-09-30T14:01:05", "obs": { "device_id": "HYD-QS-01", "obs_ts": "2026-09-30T14:01:00", "kind": "env", "values": { "water_depth_m": 3.30, "level_rise_mh": 0.9 } } },
+
+        { "t": "confirm", "at": "2026-09-30T14:04:00", "ref": 0, "actor": "OF-HUANG", "note": "郁江集7吃水2.9米，测算富余水深不足" },
+        { "t": "push", "at": "2026-09-30T14:04:30", "ref": 0 },
+        { "t": "call", "at": "2026-09-30T14:05:00", "ref": 0, "instruction": "水位陡涨且浅水区富余水深不足，立即到企石锚地锚泊", "ack": "收到，去企石锚地" },
+        { "t": "dispatch", "at": "2026-09-30T14:06:00", "ref": 0, "berth_id": "B-11" },
+        { "t": "board", "at": "2026-09-30T14:40:00", "ref": 0, "actor": "OF-LUO", "result": "violation", "findings": "低富余水深情况下冒险通过浅水区", "corrective": "责令锚泊观察水情，复查合格后放行" },
+        { "t": "recheck", "at": "2026-09-30T15:30:00", "ref": 0, "actor": "OF-LUO", "compliant": true },
+        { "t": "close", "at": "2026-09-30T15:35:00", "ref": 0 },
+
+        { "t": "obs", "arrival": "2026-09-30T14:10:03", "obs": { "device_id": "RADAR-QS-02", "obs_ts": "2026-09-30T14:10:00", "kind": "track", "track_id": "TRK-6655", "kp": 56.5, "sog_kn": 4.0 } },
+        { "t": "obs", "arrival": "2026-09-30T14:10:12", "obs": { "device_id": "AIS-QS-01", "obs_ts": "2026-09-30T14:10:10", "kind": "ais_target", "mmsi": "413000900", "kp": 56.50, "sog_kn": 4.0 } },
+
+        { "t": "confirm", "at": "2026-09-30T14:13:00", "ref": 1, "actor": "OF-HUANG", "note": "恒丰66吃水3.1米，富余水深仅0.3米" },
+        { "t": "push", "at": "2026-09-30T14:13:30", "ref": 1 },
+        { "t": "call", "at": "2026-09-30T14:15:00", "ref": 1, "instruction": "立即到企石锚地锚泊，勿再上驶", "ack": "收到" },
+        { "t": "dispatch", "at": "2026-09-30T14:18:00", "ref": 1, "berth_id": "B-11" },
+
+        { "t": "net_down", "at": "2026-09-30T15:00:00" },
+        { "t": "board", "at": "2026-09-30T15:25:00", "ref": 1, "actor": "OF-MENG", "client_id": "field-6655-board-1", "offline_queued": true, "result": "violation", "findings": "断网期间现场登临：低富余水深冒险航行", "corrective": "责令锚泊整改" },
+        { "t": "net_up", "at": "2026-09-30T16:05:00" },
+        { "t": "board", "at": "2026-09-30T16:07:00", "ref": 1, "actor": "OF-MENG", "client_id": "field-6655-board-1", "offline_queued": true, "result": "violation", "findings": "断网期间现场登临：低富余水深冒险航行", "corrective": "责令锚泊整改" },
+        { "t": "recheck", "at": "2026-09-30T16:20:00", "ref": 1, "actor": "OF-MENG", "compliant": true },
+        { "t": "close", "at": "2026-09-30T16:30:00", "ref": 1 }
+      ],
+      "expect": [
+        {
+          "case_ref": 0,
+          "final_status": "CLOSED",
+          "vessel_id": "V-YUJIANG7",
+          "berth_id": "B-11",
+          "boat_id": "PT-303",
+          "boarding_result": "violation"
+        },
+        {
+          "case_ref": 1,
+          "final_status": "CLOSED",
+          "vessel_id": "V-HENGFENG66",
+          "requested_berth_id": "B-11",
+          "berth_id": "B-12",
+          "boat_id": "PT-202",
+          "cross_segment": true,
+          "offline_flushed": 1,
+          "boarding_result": "violation",
+          "boarding_action_ts": "2026-09-30T15:25:00",
+          "lineage_devices": ["RADAR-QS-02", "AIS-QS-01", "HYD-QS-01"]
+        }
+      ]
+    },
+    {
+      "id": "D-FALSE-QN",
+      "title": "青年误报：预警已发后视频复核撤销，迟到报文不得翻案",
+      "events": [
+        { "t": "obs", "arrival": "2026-09-30T10:00:03", "obs": { "device_id": "RADAR-QN-01", "obs_ts": "2026-09-30T10:00:00", "kind": "track", "track_id": "TRK-9100", "kp": 45.4, "sog_kn": 3.0 } },
+        { "t": "confirm", "at": "2026-09-30T10:02:00", "ref": 0, "actor": "OF-HUANG", "note": "雷达发现不明目标，先发布预警并调视频复核" },
+        { "t": "push", "at": "2026-09-30T10:02:30", "ref": 0 },
+        { "t": "obs", "arrival": "2026-09-30T10:04:30", "obs": { "device_id": "CAM-QN-03", "obs_ts": "2026-09-30T10:04:00", "kind": "video_check", "kp": 45.4, "values": { "target_found": false } } },
+        { "t": "revoke", "at": "2026-09-30T10:05:00", "ref": 0, "actor": "OF-HUANG", "reason": "视频复核无船舶，雷达回波判定为漂浮物假目标" },
+        { "t": "obs", "arrival": "2026-09-30T10:40:00", "obs": { "device_id": "AIS-QN-01", "obs_ts": "2026-09-30T09:59:40", "kind": "ais_target", "mmsi": "413000789", "kp": 45.4, "sog_kn": 3.0, "backfill": true } }
+      ],
+      "expect": {
+        "case_count": 1,
+        "final_status": "REVOKED",
+        "dispatched": false,
+        "cancellation_sent": true,
+        "late_evidence": 1
+      }
+    }
+  ]
+}

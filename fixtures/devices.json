@@ -1,0 +1,19 @@
+{
+  "domain": "pinglu-canal-patrol",
+  "version": 1,
+  "devices": [
+    { "device_id": "RADAR-MD-01", "kind": "radar", "name": "马道雷达站", "segment_id": "SEG-MD", "kp": 32.0, "status": "online" },
+    { "device_id": "CAM-MD-02", "kind": "video", "name": "马道船闸上游视频", "segment_id": "SEG-MD", "kp": 31.8, "status": "online" },
+    { "device_id": "AIS-MD-01", "kind": "ais_station", "name": "马道AIS基站", "segment_id": "SEG-MD", "kp": 32.0, "status": "online" },
+    { "device_id": "WD-MD-01", "kind": "visibility_meter", "name": "马道能见度仪", "segment_id": "SEG-MD", "kp": 31.8, "status": "online" },
+
+    { "device_id": "RADAR-QN-01", "kind": "radar", "name": "青年雷达站", "segment_id": "SEG-QN", "kp": 45.0, "status": "online" },
+    { "device_id": "CAM-QN-03", "kind": "video", "name": "青年枢纽视频", "segment_id": "SEG-QN", "kp": 45.3, "status": "online" },
+    { "device_id": "AIS-QN-01", "kind": "ais_station", "name": "青年AIS基站", "segment_id": "SEG-QN", "kp": 45.0, "status": "online" },
+
+    { "device_id": "RADAR-QS-02", "kind": "radar", "name": "企石雷达站", "segment_id": "SEG-QS", "kp": 58.0, "status": "online" },
+    { "device_id": "AIS-QS-01", "kind": "ais_station", "name": "企石AIS基站", "segment_id": "SEG-QS", "kp": 58.0, "status": "online" },
+    { "device_id": "HYD-QS-01", "kind": "hydro_station", "name": "企石浅滩水文站", "segment_id": "SEG-QS", "kp": 58.5, "status": "online" },
+    { "device_id": "WX-QS-01", "kind": "weather_station", "name": "企石气象站", "segment_id": "SEG-QS", "kp": 58.0, "status": "online" }
+  ]
+}

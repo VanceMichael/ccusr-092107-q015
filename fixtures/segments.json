@@ -1,0 +1,68 @@
+{
+  "domain": "pinglu-canal-patrol",
+  "version": 1,
+  "segments": [
+    {
+      "segment_id": "SEG-MD",
+      "name": "马道枢纽航段",
+      "from_kp": 28.0,
+      "to_kp": 36.0,
+      "speed_limit_kn": 10,
+      "zones": [
+        {
+          "zone_id": "ZONE-MD-LOCK",
+          "name": "马道船闸施工限制区",
+          "from_kp": 31.5,
+          "to_kp": 31.9,
+          "restricted": true
+        }
+      ]
+    },
+    {
+      "segment_id": "SEG-QN",
+      "name": "青年枢纽航段",
+      "from_kp": 36.0,
+      "to_kp": 50.0,
+      "speed_limit_kn": 10,
+      "zones": []
+    },
+    {
+      "segment_id": "SEG-QS",
+      "name": "企石枢纽航段",
+      "from_kp": 50.0,
+      "to_kp": 64.0,
+      "speed_limit_kn": 8,
+      "shallow": true,
+      "zones": []
+    }
+  ],
+  "anchorages": [
+    {
+      "anchorage_id": "ANCH-MD-A",
+      "segment_id": "SEG-MD",
+      "name": "马道上游锚地",
+      "berths": [
+        { "berth_id": "B-07", "name": "马道锚地7号泊位", "kp": 29.6 },
+        { "berth_id": "B-08", "name": "马道锚地8号泊位", "kp": 29.4 }
+      ]
+    },
+    {
+      "anchorage_id": "ANCH-QN-B",
+      "segment_id": "SEG-QN",
+      "name": "青年作业锚地",
+      "berths": [
+        { "berth_id": "B-09", "name": "青年锚地9号泊位", "kp": 44.2 },
+        { "berth_id": "B-10", "name": "青年锚地10号泊位", "kp": 44.0 }
+      ]
+    },
+    {
+      "anchorage_id": "ANCH-QS-C",
+      "segment_id": "SEG-QS",
+      "name": "企石临时锚地",
+      "berths": [
+        { "berth_id": "B-11", "name": "企石锚地11号泊位", "kp": 52.8 },
+        { "berth_id": "B-12", "name": "企石锚地12号泊位", "kp": 52.6 }
+      ]
+    }
+  ]
+}

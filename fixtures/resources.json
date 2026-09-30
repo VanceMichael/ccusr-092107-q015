@@ -1,0 +1,17 @@
+{
+  "domain": "pinglu-canal-patrol",
+  "version": 1,
+  "patrol_boats": [
+    { "boat_id": "PT-101", "name": "海巡101", "home_anchorage_id": "ANCH-MD-A", "segment_id": "SEG-MD", "speed_kn": 22, "officer_capacity": 4 },
+    { "boat_id": "PT-202", "name": "海巡202", "home_anchorage_id": "ANCH-QN-B", "segment_id": "SEG-QN", "speed_kn": 20, "officer_capacity": 3 },
+    { "boat_id": "PT-303", "name": "海巡303", "home_anchorage_id": "ANCH-QS-C", "segment_id": "SEG-QS", "speed_kn": 18, "officer_capacity": 3 }
+  ],
+  "officers": [
+    { "officer_id": "OF-LIN", "name": "林某", "role": "boarding", "home_segment_id": "SEG-MD" },
+    { "officer_id": "OF-QIN", "name": "覃某", "role": "boarding", "home_segment_id": "SEG-MD" },
+    { "officer_id": "OF-WEI", "name": "韦某", "role": "boarding", "home_segment_id": "SEG-QN" },
+    { "officer_id": "OF-MENG", "name": "蒙某", "role": "boarding", "home_segment_id": "SEG-QN" },
+    { "officer_id": "OF-LUO", "name": "罗某", "role": "boarding", "home_segment_id": "SEG-QS" },
+    { "officer_id": "OF-HUANG", "name": "黄某", "role": "duty", "home_segment_id": null }
+  ]
+}

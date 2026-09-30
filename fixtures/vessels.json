@@ -1,0 +1,42 @@
+{
+  "domain": "pinglu-canal-patrol",
+  "version": 1,
+  "vessels": [
+    {
+      "vessel_id": "V-GUIYU01",
+      "name": "桂源货01",
+      "mmsi": "413000123",
+      "plate_no": "桂平货2021-0456",
+      "length_m": 62.0,
+      "draft_m": 2.6,
+      "min_ukc_m": 0.5
+    },
+    {
+      "vessel_id": "V-NANHAI08",
+      "name": "南海驳08",
+      "mmsi": "413000789",
+      "plate_no": "南宁货2019-1188",
+      "length_m": 55.0,
+      "draft_m": 2.2,
+      "min_ukc_m": 0.5
+    },
+    {
+      "vessel_id": "V-YUJIANG7",
+      "name": "郁江集7",
+      "mmsi": "413000555",
+      "plate_no": "贵港货2022-0734",
+      "length_m": 48.0,
+      "draft_m": 2.9,
+      "min_ukc_m": 0.6
+    },
+    {
+      "vessel_id": "V-HENGFENG66",
+      "name": "恒丰66",
+      "mmsi": "413000900",
+      "plate_no": "钦州货2020-0202",
+      "length_m": 70.0,
+      "draft_m": 3.1,
+      "min_ukc_m": 0.6
+    }
+  ]
+}
