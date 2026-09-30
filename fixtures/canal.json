@@ -1,0 +1,63 @@
+{
+  "domain": "canal-patrol-closure",
+  "canal": "平陆运河（样例）",
+  "note": "全部编号、船名、人员与位置均为虚构样例，不含真实主体信息",
+  "segments": [
+    {"id": "SEG-01", "name": "邕江过渡段", "chainage_start_km": 0.0, "chainage_end_km": 30.0},
+    {"id": "SEG-02", "name": "马道枢纽段", "chainage_start_km": 30.0, "chainage_end_km": 55.0},
+    {"id": "SEG-03", "name": "企石枢纽段", "chainage_start_km": 55.0, "chainage_end_km": 85.0},
+    {"id": "SEG-04", "name": "青年枢纽段", "chainage_start_km": 85.0, "chainage_end_km": 115.0},
+    {"id": "SEG-05", "name": "钦江近海口段", "chainage_start_km": 115.0, "chainage_end_km": 140.0}
+  ],
+  "devices": [
+    {"id": "RDR-01", "name": "马道雷达站", "kind": "radar", "segment_id": "SEG-02", "chainage_km": 39.0},
+    {"id": "RDR-02", "name": "企石雷达站", "kind": "radar", "segment_id": "SEG-03", "chainage_km": 66.0},
+    {"id": "RDR-03", "name": "青年雷达站", "kind": "radar", "segment_id": "SEG-04", "chainage_km": 96.0},
+    {"id": "RDR-04", "name": "钦江口雷达站", "kind": "radar", "segment_id": "SEG-05", "chainage_km": 118.0},
+    {"id": "CAM-01", "name": "马道上游视频球机", "kind": "video", "segment_id": "SEG-02", "chainage_km": 41.0},
+    {"id": "CAM-02", "name": "企石闸上视频球机", "kind": "video", "segment_id": "SEG-03", "chainage_km": 70.0},
+    {"id": "CAM-03", "name": "青年闸下视频球机", "kind": "video", "segment_id": "SEG-04", "chainage_km": 97.0},
+    {"id": "WLV-01", "name": "马道水位站", "kind": "hydro", "segment_id": "SEG-02", "chainage_km": 40.0},
+    {"id": "WLV-02", "name": "企石水位站", "kind": "hydro", "segment_id": "SEG-03", "chainage_km": 70.0},
+    {"id": "WST-01", "name": "航道气象站（马道）", "kind": "weather", "segment_id": "SEG-02", "chainage_km": 40.0}
+  ],
+  "registry": {
+    "413001234": {"name": "平陆货0689", "reg_no": "PX-0689", "type": "干货船"},
+    "413005678": {"name": "桂钦散2317", "reg_no": "GQ-2317", "type": "散货船"},
+    "413009012": {"name": "远大集0056", "reg_no": "YD-0056", "type": "集装箱船"},
+    "413003344": {"name": "顺航819", "reg_no": "SH-0819", "type": "干货船"}
+  },
+  "boats": [
+    {"id": "PT-01", "name": "海巡1001", "base_segment": "SEG-02", "base_chainage_km": 38.0, "speed_kmh": 30, "crew_group": "A", "status": "ready"},
+    {"id": "PT-02", "name": "海巡1002", "base_segment": "SEG-04", "base_chainage_km": 100.0, "speed_kmh": 28, "crew_group": "B", "status": "ready"},
+    {"id": "PT-03", "name": "海巡1003", "base_segment": "SEG-05", "base_chainage_km": 122.0, "speed_kmh": 26, "crew_group": "C", "status": "repair"}
+  ],
+  "persons": [
+    {"id": "P-01", "name": "韦艇长", "role": "coxswain", "boat_group": "A"},
+    {"id": "P-02", "name": "梁检查", "role": "inspector", "boat_group": "A"},
+    {"id": "P-03", "name": "周协检", "role": "assistant", "boat_group": "A"},
+    {"id": "P-04", "name": "黄艇长", "role": "coxswain", "boat_group": "B"},
+    {"id": "P-05", "name": "陈检查", "role": "inspector", "boat_group": "B"}
+  ],
+  "anchorages": [
+    {
+      "id": "ANC-01", "name": "沙坪河待闸锚地", "segment_id": "SEG-02", "chainage_km": 41.2,
+      "berths": [
+        {"id": "ANC-01-B1", "depth_m": 4.5},
+        {"id": "ANC-01-B2", "depth_m": 3.8},
+        {"id": "ANC-01-B3", "depth_m": 5.0}
+      ]
+    },
+    {
+      "id": "ANC-02", "name": "钦江待闸锚地", "segment_id": "SEG-04", "chainage_km": 96.5,
+      "berths": [
+        {"id": "ANC-02-C1", "depth_m": 4.0},
+        {"id": "ANC-02-C2", "depth_m": 4.2}
+      ]
+    }
+  ],
+  "berth_occupancy": [
+    {"berth_id": "ANC-01-B2", "vessel": "拖轮钦拖09（样例）", "start": "2026-09-30T09:00:00+08:00", "end": "2026-09-30T12:00:00+08:00"},
+    {"berth_id": "ANC-02-C1", "vessel": "待闸杂货船（样例）", "start": "2026-09-30T09:00:00+08:00", "end": "2026-09-30T13:00:00+08:00"}
+  ]
+}
